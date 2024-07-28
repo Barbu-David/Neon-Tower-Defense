@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "towers.h"
 #include "bullet_types.h"
+#include "file_parser.h"
 
 int main(void)
 {
@@ -24,12 +25,8 @@ int main(void)
 	goblin_path.waypoint_list[4] = (Vector2){552, 483};
 	goblin_path.max_waypoint = 5;  
 	goblin_path.current_waypoint = 0;	
-
-	enemy_type goblin;
-	goblin.texture=LoadTexture("assets/red.png");
-	goblin.speed=200;
-	goblin.hit_points = 100; 
-	goblin.name[0]='G';
+	
+	enemy_type goblin=enemy_type_from_file("./assets/enemies/goblin");
 
 	enemy_list* list=malloc(sizeof(enemy_list));
 	list->next=NULL;

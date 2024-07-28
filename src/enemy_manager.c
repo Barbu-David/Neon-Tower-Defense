@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "enemy_linked_lists.h"
 
-//Redo this shitty code
+//Redo this code
 
 void enemies_spawn (wave *level_waves, int wave_number, enemy_list* active_enemies)
 {

@@ -2,15 +2,23 @@
 #include<stdio.h>
 #include<string.h>
 #include"constants.c"
+#include<stdlib.h>
 
 enemy_type enemy_type_from_file(char* enemy_file)
-{
-	FILE* file = fopen("r",enemy_file);
+{	
+	unsigned int i;
+
+	FILE* file = fopen(enemy_file,"r");
+	if (file == NULL) {
+		perror("Failed to open file lmao");
+	}
+
 	float speed, hit_points;
 	char* name = malloc(sizeof(char)*max_enemy_name_size);
-	char[100] trash;
-	char[100] texture_path;
+	char trash[max_string];
+	char texture_path[max_string];
 
+	fscanf(file,"%s",trash);
 	fscanf(file,"%s",name);
 
 	fscanf(file,"%s",trash);
@@ -27,13 +35,21 @@ enemy_type enemy_type_from_file(char* enemy_file)
 	enemy_type new_type;
 	new_type.speed=speed;
 	new_type.hit_points=hit_points;
-//TO DO	
+	printf("Line 34");
+	for(i=0;i<strlen(name);i++) new_type.name[i]=name[i];
+	new_type.name[i+1]='\0';
+
+	new_type.texture=LoadTexture(texture_path);	
+
+	return new_type;
+
 }
 
 level* get_level_from_file(FILE* level_file)
 {
 	level* new_level;
-	
+
+	return new_level;	
 
 }
 

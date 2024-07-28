@@ -4,3 +4,4 @@
 #define max_subpaths 3
 #define option_width 18
 #define option_height 18
+#define max_string 100

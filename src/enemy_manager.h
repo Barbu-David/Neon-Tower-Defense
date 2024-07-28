@@ -2,7 +2,7 @@
 #define ENEMY_MANAGER_H
 
 #include "enemy.h"
-#include "linked_lists.h"
+#include "enemy_linked_lists.h"
 
 typedef struct WAVE_ITEM {
 	int enemy_quantity, selected_subpath;

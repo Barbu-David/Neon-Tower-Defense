@@ -1,0 +1,4 @@
+name: Goblin
+texture: assets/red.png
+speed 200
+hit_points 100

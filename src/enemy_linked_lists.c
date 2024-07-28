@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "enemy.h"
-#include "linked_lists.h"
+#include "enemy_linked_lists.h"
 #include "math.h"
 
 

@@ -3,7 +3,7 @@
 
 #include"raylib.h"
 #include<stdbool.h>
-#include"linked_lists.h"
+#include"enemy_linked_lists.h"
 
 typedef struct BULLET {
 	Vector2 position;

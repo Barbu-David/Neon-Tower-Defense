@@ -1,5 +1,5 @@
-#ifndef CODE_LISTS_H
-#define CODE_LISTS_H
+#ifndef ENEMY_CODE_LISTS_H
+#define ENEMY_CODE_LISTS_H
 
 #include "enemy.h"
 

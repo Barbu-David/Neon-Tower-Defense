@@ -1,7 +1,8 @@
 #include "enemy_manager.h"
 #include <stdlib.h>
-#include "linked_lists.h"
+#include "enemy_linked_lists.h"
 
+//Redo this shitty code
 
 void enemies_spawn (wave *level_waves, int wave_number, enemy_list* active_enemies)
 {

@@ -6,21 +6,23 @@
 #include<stdio.h>
 
 typedef struct LEVEL {
-	int path_number, enemy_type_number, tower_number, wave_number;
-	int *money, *lives, *wave_item_number;
-	double start_time;
-	wave_item* wave_items;
-	enemy_type* all_enemy_types;
-	enemy_list* all_enemey_list;
+	Texture2D background;
+	int tower_number, waves_number;
+	wave* wave_list;
 	tower** tower_list;
-	wave* wave;
+	enemy_list* en_list;
+	int* money;
+	int* lives;
 }level;
 
 enemy_type enemy_type_from_file(char* enemy_file);
 path path_from_file(char* path_file);
-wave wave_from_file(char* wave_file);
+wave* wave_from_file(char* wave_file);
+tower_type tower_type_from_file(char* tower_type_path);
+tower** tower_list_from_file(char* tower_list_path);
+int number_of_items_from_list(char* items_list);
 
 void play_level(level* current_level);
-level* get_level_from_file(FILE* level_file);
+level* get_level_from_file(char* level_file);
 
 #endif

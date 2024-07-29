@@ -11,25 +11,29 @@ typedef struct BULLET {
 	Texture2D texture;
 	void (*bullet_move) (struct BULLET*);
 	bool active;
-	
 }bullet;
 
 typedef struct BULLET_LIST{
-    bullet* selected_bullet;
-    struct BULLET_LIST *next;
+	bullet* selected_bullet;
+	struct BULLET_LIST *next;
 }bullet_list;
 
-typedef struct TOWER{
-	Vector2 position;
+typedef struct TOWER_TYPE{
 	Texture2D texture, ring_texture;
 	float radius;
 	int upgrade_options_number;
-	struct TOWER **upgrade_possibility;
-	int *cost;
-	double shoot_delay, start_time, elapsed_time;
-	bool open_menu;
+	struct TOWER_TYPE* upgrade_possibility;
+	int cost;
+	double shoot_delay;
 	bullet bullet_type;
+}tower_type;
+
+typedef struct TOWER{
+	Vector2 position;
+	double start_time, elapsed_time;
+	bool open_menu;
 	bullet_list* active_bullets;
+	tower_type type;
 }tower;
 
 bullet* bullet_intit(Vector2 position, enemy* target, Texture2D texture, void(*bullet_move)(bullet*) );
@@ -38,7 +42,7 @@ void bullet_update(bullet* current_bullet);
 void tower_shoot(tower* current_tower,enemy_list* list);
 void tower_click(tower* current_tower, int* total_money);
 void tower_draw(tower* current_tower);
-void tower_update(tower* current_tower_list, int number_of_towers, enemy_list* list, int* total_money);
+void tower_update(tower** current_tower_list, int number_of_towers, enemy_list* list, int* total_money);
 void push_bullet_to_list(bullet_list *head , bullet* new_element_value);
 void update_bullet_list(bullet_list *head);
 void tower_upgrade(tower* current_tower, int upgrade_number, int* total_money);

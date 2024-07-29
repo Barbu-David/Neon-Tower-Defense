@@ -44,7 +44,7 @@ void no_bullet_move(bullet* current_bullet)
 bullet normal_bullet_get(){
 	bullet new_bullet;
 	new_bullet.active=true;
-	new_bullet.texture=LoadTexture("assets/bullet.png");
+	new_bullet.texture=LoadTexture("assets/tower_textures/bullet.png");
 	new_bullet.bullet_move=normal_bullet_move;
 	return new_bullet;
 }
@@ -52,7 +52,22 @@ bullet normal_bullet_get(){
 bullet no_bullet_get(){
 	bullet new_bullet;
 	new_bullet.active=false;
-	new_bullet.texture=LoadTexture("assets/bullet.png");
+	new_bullet.texture=LoadTexture("assets/tower_textures/bullet.png");
 	new_bullet.bullet_move=no_bullet_move;
 	return new_bullet;
+}
+
+bullet get_bullet(int type)
+{
+	switch (type)
+	{
+		case 1:
+		return normal_bullet_get();
+		break;
+		default:
+		return no_bullet_get();
+		break;
+
+	}
+
 }

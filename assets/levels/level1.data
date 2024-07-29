@@ -1,42 +1,5 @@
-MONEY 1000
-LIVES 10
-
-PATH_NUMBER 2
-PATH_WAYPOINTS 5
-WAYPOINT 0 5 290
-WAYPOINT 1 261 288
-WAYPOINT 2 267 140
-WAYPOINT 3 552 147
-WAYPOINT 4 552 483
-PATH_WAYPOINT 2
-WAYPOINT 0 552 12
-WAYPOINT 1 552 483
-
-ENEMY_TYPE_NUMBER 1
-ENEMY_NAME Goblin
-Goblin_TEXTURE assets/red.png
-Goblin_SPEED 200
-Goblin_HIT_POINTS 100
-
-WAVE_ITEM_NUMBER 0 1
-WAVE_ITEM item1
-item1.enemy_quantity 30
-item1.spawn_delay 0.5
-item1.type Goblin
-item1.selected_subpath 0
-WAVE_ITEM_NUMBER 1 1
-WAVE_ITEM item2
-item1.enemy_quantity 10
-item1.spawn_delay 2
-item1.type Goblin
-item1.selected_subpath 1
-WAVE_NUMBER 1
-WAVE wave1
-wave1 start_time 0
-wave1.item_number 2
-wave1.subpaths 0 1
-wave1.subpaths 1 2
-
-TOWER_NUMBER 1
-empty_slot 330 200
-
+1000
+20
+./assets/backgrounds/level1.png
+./assets/waves/wave1
+./assets/towers/towers_level1

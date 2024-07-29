@@ -16,34 +16,11 @@ int main(void)
 	SetTargetFPS(60);
 
 	Texture2D background = LoadTexture("assets/level1.png");
-	
-	path goblin_path;
-	goblin_path.waypoint_list[0] = (Vector2){5, 290};
-	goblin_path.waypoint_list[1] = (Vector2){261, 288};
-	goblin_path.waypoint_list[2] = (Vector2){267, 140};
-	goblin_path.waypoint_list[3] = (Vector2){552, 147};
-	goblin_path.waypoint_list[4] = (Vector2){552, 483};
-	goblin_path.max_waypoint = 5;  
-	goblin_path.current_waypoint = 0;	
-	
-	enemy_type goblin=enemy_type_from_file("./assets/enemies/goblin");
 
 	enemy_list* list=malloc(sizeof(enemy_list));
 	list->next=NULL;
 
-	wave_item item1;
-	item1.enemy_quantity=30;
-	item1.spawn_delay=0.5;
-	item1.type=goblin;
-	item1.selected_subpath=0;
-
-	wave wave1;
-	wave1.start_time=0;
-	wave1.wave_item_number=1;
-	wave1.item[0]=item1;
-	wave1.wave_item_number=1;
-	wave1.subpaths[0]=goblin_path;
-
+	wave wave1=wave_from_file("./assets/waves/wave1");;
 	wave *waves_level1=malloc(sizeof(wave));
 	waves_level1[0]=wave1;
 
@@ -94,7 +71,6 @@ int main(void)
 
 	UnloadTexture(background);
 	UnloadTexture(new_tower->texture);
-	UnloadTexture(goblin.texture);
 	UnloadTexture(new_bullet.texture);
 	UnloadTexture(new_tower->ring_texture);
 	CloseWindow();

@@ -12,7 +12,6 @@ typedef struct ENEMY_TYPE {
 }enemy_type;
 
 typedef struct PATH {
-
 	Vector2 waypoint_list[max_waypoints_number];
 	int max_waypoint, current_waypoint;
 }path;

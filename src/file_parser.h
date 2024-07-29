@@ -17,6 +17,8 @@ typedef struct LEVEL {
 }level;
 
 enemy_type enemy_type_from_file(char* enemy_file);
+path path_from_file(char* path_file);
+wave wave_from_file(char* wave_file);
 
 void play_level(level* current_level);
 level* get_level_from_file(FILE* level_file);

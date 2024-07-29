@@ -10,7 +10,7 @@ enemy_type enemy_type_from_file(char* enemy_file)
 
 	FILE* file = fopen(enemy_file,"r");
 	if (file == NULL) {
-		perror("Failed to open file lmao");
+		perror("Failed to open file ");
 	}
 
 	float speed, hit_points;
@@ -35,7 +35,6 @@ enemy_type enemy_type_from_file(char* enemy_file)
 	enemy_type new_type;
 	new_type.speed=speed;
 	new_type.hit_points=hit_points;
-	printf("Line 34");
 	for(i=0;i<strlen(name);i++) new_type.name[i]=name[i];
 	new_type.name[i+1]='\0';
 
@@ -45,6 +44,69 @@ enemy_type enemy_type_from_file(char* enemy_file)
 
 }
 
+path path_from_file(char* path_file)
+{	
+	int i;
+	path new_path;
+	FILE* file=fopen(path_file,"r");
+	if (file == NULL) {
+		perror("Failed to open file ");
+	}
+
+	fscanf(file,"%d",&new_path.current_waypoint);
+	fscanf(file,"%d",&new_path.max_waypoint);
+	
+	for(i=0;i<new_path.max_waypoint;i++)
+	{
+		fscanf(file, "%f", &new_path.waypoint_list[i].x);
+		fscanf(file, "%f", &new_path.waypoint_list[i].y);
+	}	
+	
+	fclose(file);
+	
+	return new_path;
+}
+
+wave wave_from_file(char* wave_file)
+{
+	FILE* file=fopen(wave_file,"r");
+	if (file == NULL) {
+		perror("Failed to open file ");
+	
+	}
+	
+	char wave_path[max_string], enemy_type_path[max_string];
+	wave new_wave;
+	int number_of_paths, i;
+
+	fscanf(file,"%lf", &new_wave.start_time);
+	fscanf(file,"%d", &number_of_paths);
+	
+	for(i=0;i<number_of_paths;i++)
+	{
+	fscanf(file,"%s",wave_path);
+	new_wave.subpaths[i]=path_from_file(wave_path);
+	}
+
+	fscanf(file,"%d",&new_wave.wave_item_number);
+	
+	for(i=0;i<new_wave.wave_item_number;i++)
+	{
+		wave_item new_item;
+		fscanf(file,"%d",&new_item.enemy_quantity);
+		fscanf(file,"%lf",&new_item.spawn_delay);
+		fscanf(file,"%d",&new_item.selected_subpath);
+		fscanf(file,"%s",enemy_type_path);
+		new_item.type=enemy_type_from_file(enemy_type_path);
+		
+		new_wave.item[i]=new_item;
+	}
+
+	fclose(file);
+	return new_wave;
+}
+
+/*
 level* get_level_from_file(FILE* level_file)
 {
 	level* new_level;
@@ -56,4 +118,4 @@ level* get_level_from_file(FILE* level_file)
 void play_level(level* current_level)
 {
 
-}
+}*/

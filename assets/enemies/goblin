@@ -1,4 +1,4 @@
 name: Goblin
-texture: assets/red.png
+texture: assets/enemies_textures/red.png
 speed 200
 hit_points 100

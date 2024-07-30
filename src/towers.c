@@ -138,10 +138,12 @@ void tower_update(tower** current_tower_list, int number_of_towers, enemy_list* 
 }
 
 void tower_upgrade(tower* current_tower, int upgrade_number, int* total_money ){	
-	if(*(total_money)>current_tower->type.upgrade_possibility[upgrade_number].cost)
+	if(*(total_money)>=current_tower->type.upgrade_possibility[upgrade_number].cost)
+	{
 		*(total_money)-=current_tower->type.upgrade_possibility[upgrade_number].cost;
-	tower_type upgrade=current_tower->type.upgrade_possibility[upgrade_number];
-	current_tower->type=upgrade;
+		tower_type upgrade=current_tower->type.upgrade_possibility[upgrade_number];
+		current_tower->type=upgrade;
+	}
 }
 
 void unload_towers(tower** tower_list, int number_of_towers)

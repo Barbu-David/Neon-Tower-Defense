@@ -10,8 +10,8 @@ typedef struct ENEMY_LIST{
 
 void push_enemy_to_list(enemy_list *head , enemy* new_element_value);
 int return_no_enemy_list(enemy_list *head);
-void update_enemy_list(enemy_list *head);
-enemy* enemy_in_range(Vector2 position, float radius,enemy_list* head);
+void update_enemy_list(enemy_list *head, int* money, int* lives);
+enemy* enemy_in_range(Vector2 position, float radius,enemy_list* heada;
 void unload_enemies(enemy_list *head);
 
 #endif

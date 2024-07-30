@@ -20,24 +20,26 @@ void push_enemy_to_list(enemy_list *head, enemy* new_element_value){
 	new_element->next = NULL;
 }
 
-void update_enemy_list(enemy_list *head){
-    enemy_list *iterator = head->next;  
-    enemy_list *previous = head;        
+void update_enemy_list(enemy_list *head, int* money, int* lives){
+	enemy_list *iterator = head->next;  
+	enemy_list *previous = head;        
 
-    while (iterator != NULL){
-        enemy_list *next = iterator->next;
+	while (iterator != NULL){
+		enemy_list *next = iterator->next;
 
-        enemy_update(iterator->selected_enemy);
+		enemy_update(iterator->selected_enemy, money, lives);
 
-        if (!iterator->selected_enemy->alive) {
-            previous->next = next;
-            free(iterator);
-        } else {
-            previous = iterator;
-        }
+		if (!iterator->selected_enemy->alive) {
+			previous->next = next;
+			enemy_die(iterator->selected_enemy, money);
+			free(iterator);		
+		}
+		else {
+			previous = iterator;
+		}
 
-        iterator = next;
-    }
+		iterator = next;
+	}
 }
 
 int return_no_enemy_list(enemy_list *head){
@@ -55,22 +57,20 @@ int return_no_enemy_list(enemy_list *head){
 }
 
 enemy* enemy_in_range(Vector2 position, float radius,enemy_list *head){
-    enemy_list *iterator = head->next;  
+	enemy_list *iterator = head->next;  
+	
+	while (iterator != NULL){
+		enemy_list *next = iterator->next;
+		
+		float distanceX=iterator->selected_enemy->position.x-position.x;
+		float distanceY=iterator->selected_enemy->position.y-position.y;
+		float distance=sqrt(distanceX*distanceX+distanceY*distanceY);	
 
-    while (iterator != NULL){
-        enemy_list *next = iterator->next;
+		if (distance<radius) 
+			return iterator->selected_enemy;
 
-        enemy_update(iterator->selected_enemy);
-
-	float distanceX=iterator->selected_enemy->position.x-position.x;
-	float distanceY=iterator->selected_enemy->position.y-position.y;
-	float distance=sqrt(distanceX*distanceX+distanceY*distanceY);	
-
-        if (distance<radius) 
-            return iterator->selected_enemy;
-
-        iterator = next;
-    }
+		iterator = next;
+	}
 
 	return NULL;
 }

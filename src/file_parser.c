@@ -4,6 +4,7 @@
 #include"constants.c"
 #include<stdlib.h>
 #include"bullet_types.h"
+#include"level_gui.h"
 
 enemy_type enemy_type_from_file(char* enemy_file)
 {	
@@ -30,17 +31,20 @@ enemy_type enemy_type_from_file(char* enemy_file)
 
 	fscanf(file,"%s",trash);
 	fscanf(file,"%f",&hit_points);
-
+	
+	enemy_type new_type;
+/*	fscanf(file,"%d",&new_type.prize);
+	fscanf(file,"%d",&new_type.penalty);
+*/
 	fclose(file);
 
-	enemy_type new_type;
 	new_type.speed=speed;
 	new_type.hit_points=hit_points;
 	for(i=0;i<strlen(name);i++) new_type.name[i]=name[i];
 	new_type.name[i+1]='\0';
 
 	new_type.texture=LoadTexture(texture_path);	
-
+	
 	return new_type;
 
 }
@@ -227,9 +231,11 @@ void play_level(level* current_level)
 {
 	DrawTexture(current_level->background,0,0,WHITE);
 
-	enemies_spawn(current_level->wave_list,current_level->waves_number,current_level->en_list);
+	enemies_spawn(current_level->wave_list,current_level->waves_number,current_level->en_list,current_level->money,current_level->lives);
 
 	tower_update(current_level->tower_list,current_level->tower_number,current_level->en_list,current_level->money);
+	
+	draw_level_gui(current_level);
 
 }
 
@@ -240,5 +246,5 @@ void level_unload(level* current_level)
 	UnloadTexture(current_level->background);	
 	unload_towers(current_level->tower_list,current_level->tower_number);
 	unload_enemies(current_level->en_list);
-	free(current_level->wave_list);
+	free(current_level->wave_list);	
 }

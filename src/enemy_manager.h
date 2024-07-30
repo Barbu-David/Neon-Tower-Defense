@@ -17,6 +17,6 @@ typedef struct WAVE {
 	int wave_item_number;
 }wave;
 
-void enemies_spawn(wave *level_waves, int wave_number, enemy_list* active_enemies);
+void enemies_spawn(wave *level_waves, int wave_number, enemy_list* active_enemies, int* money, int* lives);
 
 #endif

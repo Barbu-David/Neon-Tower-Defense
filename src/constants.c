@@ -6,3 +6,7 @@
 #define option_height 18
 #define max_string 100
 #define max_upgrade_pos 5
+#define gui_string_buffer_size 200
+#define gui_position_x 32
+#define gui_position_y 32
+#define gui_text_size 32

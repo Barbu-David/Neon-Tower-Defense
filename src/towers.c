@@ -63,6 +63,20 @@ void update_bullet_list(bullet_list *head){
 	}
 }
 
+void unload_bullet_list(bullet_list *head){
+	bullet_list *iterator = head->next;
+
+	while (iterator != NULL){
+		bullet_list *next = iterator->next;
+		free(iterator);
+
+		iterator = next;
+	}
+
+	free(head);
+}
+
+
 void tower_shoot(tower* current_tower, enemy_list* list){
 
 	current_tower->elapsed_time=GetTime();
@@ -88,7 +102,7 @@ void tower_click(tower* current_tower, int* total_money){
 	mousePosition.x=GetMouseX();
 	mousePosition.y=GetMouseY();
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && current_tower->open_menu==true )
-{	
+	{	
 		if (current_tower->type.upgrade_options_number>0 && mousePosition.x >= current_tower->position.x -current_tower->type.texture.width/2 &&
 				mousePosition.x <= current_tower->position.x -current_tower->type.texture.width/2 + option_width &&
 				mousePosition.y >= current_tower->position.y -current_tower->type.texture.height/2 &&
@@ -96,7 +110,7 @@ void tower_click(tower* current_tower, int* total_money){
 			tower_upgrade(current_tower, 0, total_money);
 			current_tower->open_menu=false;
 		}
-		
+
 	}
 
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
@@ -107,25 +121,36 @@ void tower_click(tower* current_tower, int* total_money){
 
 
 }	
-	void tower_draw(tower* current_tower){
-		DrawTexture(current_tower->type.texture, current_tower->position.x,current_tower->position.y, WHITE);
-		if(current_tower->open_menu) DrawTexture(current_tower->type.ring_texture, current_tower->position.x-current_tower->type.texture.width/2,current_tower->position.y-current_tower->type.texture.height/2, WHITE);
+void tower_draw(tower* current_tower){
+	DrawTexture(current_tower->type.texture, current_tower->position.x,current_tower->position.y, WHITE);
+	if(current_tower->open_menu) DrawTexture(current_tower->type.ring_texture, current_tower->position.x-current_tower->type.texture.width/2,current_tower->position.y-current_tower->type.texture.height/2, WHITE);
 
-	}
+}
 
-	void tower_update(tower** current_tower_list, int number_of_towers, enemy_list* list, int* total_money)
+void tower_update(tower** current_tower_list, int number_of_towers, enemy_list* list, int* total_money)
+{
+	for(int i=0;i<number_of_towers;i++)
 	{
-		for(int i=0;i<number_of_towers;i++)
-		{
-			tower_shoot(current_tower_list[i], list);
-			tower_click(current_tower_list[i], total_money);
-			tower_draw(current_tower_list[i]);
-		}
+		tower_shoot(current_tower_list[i], list);
+		tower_click(current_tower_list[i], total_money);
+		tower_draw(current_tower_list[i]);
 	}
+}
 
-	void tower_upgrade(tower* current_tower, int upgrade_number, int* total_money ){	
-		if(*(total_money)>current_tower->type.upgrade_possibility[upgrade_number].cost)
+void tower_upgrade(tower* current_tower, int upgrade_number, int* total_money ){	
+	if(*(total_money)>current_tower->type.upgrade_possibility[upgrade_number].cost)
 		*(total_money)-=current_tower->type.upgrade_possibility[upgrade_number].cost;
-		tower_type upgrade=current_tower->type.upgrade_possibility[upgrade_number];
-		current_tower->type=upgrade;
+	tower_type upgrade=current_tower->type.upgrade_possibility[upgrade_number];
+	current_tower->type=upgrade;
+}
+
+void unload_towers(tower** tower_list, int number_of_towers)
+{
+	for(int i=0;i<number_of_towers;i++)
+	{
+		UnloadTexture(tower_list[i]->type.texture);
+		UnloadTexture(tower_list[i]->type.ring_texture);
+		unload_bullet_list(tower_list[i]->active_bullets);
+		free(tower_list[i]);
 	}
+}

@@ -57,7 +57,7 @@ void enemy_draw(enemy* current_enemy)
 }
 
 void enemy_update(enemy* current_enemy)
-	{	
+{	
 	enemy_draw(current_enemy);
 	enemy_move(current_enemy);
 	if(current_enemy->type.hit_points<=0) current_enemy->alive=false;

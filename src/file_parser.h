@@ -24,5 +24,6 @@ int number_of_items_from_list(char* items_list);
 
 void play_level(level* current_level);
 level* get_level_from_file(char* level_file);
+void level_unload(level* current_level);
 
 #endif

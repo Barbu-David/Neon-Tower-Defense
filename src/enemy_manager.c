@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include "enemy_linked_lists.h"
 
-//Redo this code
-
 void enemies_spawn (wave *level_waves, int wave_number, enemy_list* active_enemies)
 {
 	double current_time=GetTime();

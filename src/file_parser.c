@@ -191,8 +191,8 @@ tower** tower_list_from_file(char* tower_list_path)
 }
 
 level* get_level_from_file(char* level_file)
-	{
-	
+{
+
 	level* new_level=malloc(sizeof(level));
 	FILE* file=fopen(level_file,"r");
 	if (file == NULL) {
@@ -204,11 +204,11 @@ level* get_level_from_file(char* level_file)
 	new_level->money=malloc(sizeof(int));
 	fscanf(file,"%d",new_level->money);
 	fscanf(file,"%d",new_level->lives);	
-	
+
 
 	fscanf(file,"%s",back_path);
 	fscanf(file,"%s",wave_path);
-	
+
 	fscanf(file,"%s",towers_path);
 	new_level->tower_number=number_of_items_from_list(towers_path);
 	new_level->waves_number=number_of_items_from_list(wave_path);
@@ -221,14 +221,24 @@ level* get_level_from_file(char* level_file)
 
 	fclose(file);
 	return new_level;	
-	}
+}
 
 void play_level(level* current_level)
 {
 	DrawTexture(current_level->background,0,0,WHITE);
 
-		enemies_spawn(current_level->wave_list,current_level->waves_number,current_level->en_list);
-	
-		tower_update(current_level->tower_list,current_level->tower_number,current_level->en_list,current_level->money);
-	
+	enemies_spawn(current_level->wave_list,current_level->waves_number,current_level->en_list);
+
+	tower_update(current_level->tower_list,current_level->tower_number,current_level->en_list,current_level->money);
+
+}
+
+void level_unload(level* current_level)
+{
+	free(current_level->money);
+	free(current_level->lives);
+	UnloadTexture(current_level->background);	
+	unload_towers(current_level->tower_list,current_level->tower_number);
+	unload_enemies(current_level->en_list);
+	free(current_level->wave_list);
 }

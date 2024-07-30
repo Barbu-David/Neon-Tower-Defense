@@ -46,5 +46,6 @@ void tower_update(tower** current_tower_list, int number_of_towers, enemy_list* 
 void push_bullet_to_list(bullet_list *head , bullet* new_element_value);
 void update_bullet_list(bullet_list *head);
 void tower_upgrade(tower* current_tower, int upgrade_number, int* total_money);
+void unload_towers(tower** tower_list, int number_of_towrs);
 
 #endif

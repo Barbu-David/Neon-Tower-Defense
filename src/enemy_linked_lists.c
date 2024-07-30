@@ -74,3 +74,17 @@ enemy* enemy_in_range(Vector2 position, float radius,enemy_list *head){
 
 	return NULL;
 }
+
+void unload_enemies(enemy_list* head)
+{
+	enemy_list *iterator = head->next;  
+	while (iterator != NULL){
+		enemy_list *next = iterator->next;
+
+		free(iterator);
+		iterator = next;
+	}
+
+	free(head);
+
+}

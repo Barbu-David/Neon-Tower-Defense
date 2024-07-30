@@ -24,10 +24,10 @@ int main(void)
 		ClearBackground(RAYWHITE);
 		
 		play_level(level1);
-			
 		EndDrawing();
 	}
-
+	
+	level_unload(level1);
 	CloseWindow();
 
 	return 0;

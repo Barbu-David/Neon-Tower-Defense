@@ -15,6 +15,18 @@ enemy* enemy_init(path enemy_path, enemy_type type)
 	return current_enemy;
 }
 
+void enemy_enter(enemy* current_enemy, int* money, int* lives)
+{
+	*(lives)-=current_enemy->type.penalty;
+	enemy_die(current_enemy, money);
+}
+
+void enemy_die(enemy* current_enemy, int* money)
+{	
+	*(money)+=current_enemy->type.prize;	
+	current_enemy->alive=false;
+}
+
 void enemy_move(enemy* current_enemy, int* money, int* lives)
 {	
 
@@ -34,7 +46,6 @@ void enemy_move(enemy* current_enemy, int* money, int* lives)
 		current_enemy->enemy_path.current_waypoint++;
 		if(current_enemy->enemy_path.current_waypoint>=current_enemy->enemy_path.max_waypoint-1)
 		{
-		current_enemy->alive=false;
 		enemy_enter(current_enemy, money, lives);
 		}
 	}
@@ -61,18 +72,6 @@ void enemy_update(enemy* current_enemy, int* money, int* lives)
 {	
 	enemy_draw(current_enemy);
 	enemy_move(current_enemy,  money,  lives);
-	if(current_enemy->type.hit_points<=0) current_enemy->alive=false;
-}
-
-void enemy_enter(enemy* current_enemy, int* money, int* lives)
-{
-	*(lives)-=current_enemy->type.penalty;
-	enemy_die(current_enemy, money);
-}
-
-void enemy_die(enemy* current_enemy, int* money)
-{	
-	*(money)+=current_enemy->type.prize;
-	free(current_enemy);	
+	if(current_enemy->type.hit_points<=0) enemy_die(current_enemy,money);
 }
 

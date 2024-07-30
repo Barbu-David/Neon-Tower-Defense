@@ -1,4 +1,5 @@
 #include "level_player.h"
+#include <stdlib.h>
 
 void play_level(level* current_level)
 {

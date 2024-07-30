@@ -30,8 +30,7 @@ void update_enemy_list(enemy_list *head, int* money, int* lives){
 
 		if (!iterator->selected_enemy->alive) {
 			previous->next = next;
-			enemy_die(iterator->selected_enemy, money);
-			free(iterator);		
+			free(iterator);
 		}
 		else {
 			previous = iterator;

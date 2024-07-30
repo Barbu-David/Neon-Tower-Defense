@@ -5,7 +5,7 @@
 #include<stdbool.h>
 #include"enemy_linked_lists.h"
 
-typedef struct BULLET {
+typedef struct BULLET{
 	Vector2 position;
 	enemy* target;
 	Texture2D texture;
@@ -36,7 +36,7 @@ typedef struct TOWER{
 	tower_type type;
 }tower;
 
-bullet* bullet_intit(Vector2 position, enemy* target, Texture2D texture, void(*bullet_move)(bullet*) );
+bullet* bullet_init(Vector2 position, enemy* target, Texture2D texture, void(*bullet_move)(bullet*) );
 void bullet_draw(bullet* current_bullet);
 void bullet_update(bullet* current_bullet);
 void tower_shoot(tower* current_tower,enemy_list* list);
@@ -46,6 +46,6 @@ void tower_update(tower** current_tower_list, int number_of_towers, enemy_list* 
 void push_bullet_to_list(bullet_list *head , bullet* new_element_value);
 void update_bullet_list(bullet_list *head);
 void tower_upgrade(tower* current_tower, int upgrade_number, int* total_money);
-void unload_towers(tower** tower_list, int number_of_towrs);
+void unload_towers(tower** tower_list, int number_of_towers);
 
 #endif

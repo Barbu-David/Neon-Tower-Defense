@@ -1,12 +1,19 @@
 #include "bullet_types.h"
 #include <math.h>
+#include <stddef.h>
 
 void normal_bullet_move(bullet* current_bullet)
-{
+{	
+	if(current_bullet->target==NULL)
+	{
+		current_bullet->active=false;
+		return;
+	}
+
         float currentX=current_bullet->position.x;
         float currentY=current_bullet->position.y;
-        float targetX=current_bullet->target->position.x;
-        float targetY=current_bullet->target->position.y;
+        float targetX=current_bullet->target->position.x+current_bullet->target->type.texture.width/2;
+        float targetY=current_bullet->target->position.y+current_bullet->target->type.texture.height/2;
         float frame_time=GetFrameTime();
         float speed=1000*frame_time;
 

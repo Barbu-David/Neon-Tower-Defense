@@ -3,6 +3,6 @@ build:
 run:
 	./td 
 debug:
-	valgrind ./td
+	valgrind --leak-check=full ./td
 clean:
 	rm td

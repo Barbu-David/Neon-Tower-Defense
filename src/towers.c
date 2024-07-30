@@ -54,6 +54,7 @@ void update_bullet_list(bullet_list *head){
 
 		if (!iterator->selected_bullet->active) {
 			previous->next = next;
+			free(iterator->selected_bullet);
 			free(iterator);
 		} else {
 			previous = iterator;
@@ -68,6 +69,7 @@ void unload_bullet_list(bullet_list *head){
 
 	while (iterator != NULL){
 		bullet_list *next = iterator->next;
+		free(iterator->selected_bullet);
 		free(iterator);
 
 		iterator = next;
@@ -155,4 +157,6 @@ void unload_towers(tower** tower_list, int number_of_towers)
 		unload_bullet_list(tower_list[i]->active_bullets);
 		free(tower_list[i]);
 	}
+	
+	free(tower_list);
 }

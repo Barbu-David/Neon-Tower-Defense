@@ -43,6 +43,7 @@ enemy_type enemy_type_from_file(char* enemy_file)
 	new_type.name[i+1]='\0';
 
 	new_type.texture=LoadTexture(texture_path);	
+	free(name);
 	
 	return new_type;
 

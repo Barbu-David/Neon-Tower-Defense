@@ -20,6 +20,7 @@ void level_unload(level* current_level)
         UnloadTexture(current_level->background);    
         unload_towers(current_level->tower_list,current_level->tower_number);
         unload_enemies(current_level->en_list);
-        free(current_level->wave_list); 
+        free(current_level->wave_list);
+	free(current_level); 
 }
 

@@ -139,11 +139,24 @@ void tower_update(tower** current_tower_list, int number_of_towers, enemy_list* 
 	}
 }
 
+void free_tower_type(tower_type* type) {
+
+	if (type->upgrade_possibility != NULL) {
+		for (int i = 0; i < type->upgrade_options_number; ++i) {
+			free_tower_type(&(type->upgrade_possibility[i]));
+		}
+		free(type->upgrade_possibility);
+		type->upgrade_possibility = NULL;
+	}
+}
+
+
 void tower_upgrade(tower* current_tower, int upgrade_number, int* total_money ){	
 	if(*(total_money)>=current_tower->type.upgrade_possibility[upgrade_number].cost)
 	{
 		*(total_money)-=current_tower->type.upgrade_possibility[upgrade_number].cost;
 		tower_type upgrade=current_tower->type.upgrade_possibility[upgrade_number];
+		free_tower_type(&(current_tower->type));
 		current_tower->type=upgrade;
 	}
 }
@@ -155,8 +168,9 @@ void unload_towers(tower** tower_list, int number_of_towers)
 		UnloadTexture(tower_list[i]->type.texture);
 		UnloadTexture(tower_list[i]->type.ring_texture);
 		unload_bullet_list(tower_list[i]->active_bullets);
+		free_tower_type(&(tower_list[i]->type));
 		free(tower_list[i]);
 	}
-	
+
 	free(tower_list);
 }

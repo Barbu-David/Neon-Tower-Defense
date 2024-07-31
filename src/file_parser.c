@@ -138,7 +138,9 @@ tower_type tower_type_from_file(char* tower_type_path)
 	new_type.ring_texture=LoadTexture(ring_texture_path);
 	new_type.bullet_type=get_bullet(bullet_type);
 
+	if(new_type.upgrade_options_number>0)
 	new_type.upgrade_possibility=malloc(sizeof(tower_type)*new_type.upgrade_options_number);
+	else 	new_type.upgrade_possibility=NULL;
 
 	for(i=0;i<new_type.upgrade_options_number;i++)
 	{	

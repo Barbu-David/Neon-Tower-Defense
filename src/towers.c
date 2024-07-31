@@ -91,12 +91,13 @@ void tower_shoot(tower* current_tower, enemy_list* list, float time_offset){
 
 	current_tower->elapsed_time=GetTime()-time_offset;
 
+	Vector2 bullet_position={current_tower->position.x+current_tower->type.texture.width/2, current_tower->position.y+current_tower->type.texture.height/2};
 	if(current_tower->type.bullet_type.active && current_tower->elapsed_time-current_tower->start_time>current_tower->type.shoot_delay)
 	{
-		enemy* enemy_to_shoot=enemy_in_range(current_tower->position,current_tower->type.radius,list);
+		enemy* enemy_to_shoot=enemy_in_range(bullet_position,current_tower->type.radius,list);
 		if(enemy_to_shoot!=NULL)
-		{
-			bullet* shot_bullet=bullet_init(current_tower->position, enemy_to_shoot, current_tower->type.bullet_type.texture, current_tower->type.bullet_type.bullet_move);
+		{	
+			bullet* shot_bullet=bullet_init(bullet_position, enemy_to_shoot, current_tower->type.bullet_type.texture, current_tower->type.bullet_type.bullet_move);
 			current_tower->start_time=current_tower->elapsed_time;
 			push_bullet_to_list(current_tower->active_bullets,shot_bullet);
 		}	
@@ -108,9 +109,8 @@ void tower_shoot(tower* current_tower, enemy_list* list, float time_offset){
 
 void tower_click(tower* current_tower, int* total_money){
 
-	Vector2 mousePosition;
-	mousePosition.x=GetMouseX();
-	mousePosition.y=GetMouseY();
+	Vector2 mousePosition={GetMouseX(),GetMouseY()};
+	
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && current_tower->open_menu==true )
 	{	
 		if (current_tower->type.upgrade_options_number>0 && mousePosition.x >= current_tower->position.x -current_tower->type.texture.width/2 &&

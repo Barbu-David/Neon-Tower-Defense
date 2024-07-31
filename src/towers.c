@@ -30,27 +30,35 @@ bullet* bullet_init(Vector2 position, enemy* target, Texture2D texture, void(*bu
 	return new_bullet;
 }
 
+void bullet_find_target(bullet* current_bullet, enemy_list* list, float radius)
+{	
+	enemy* enemy_to_shoot=enemy_in_range(current_bullet->position,radius,list);
+
+	if(enemy_to_shoot==NULL) current_bullet->target=NULL;
+	else current_bullet->target=enemy_to_shoot;
+}
 
 void bullet_draw(bullet* current_bullet)
 {
 	DrawTexture(current_bullet->texture, current_bullet->position.x,current_bullet->position.y, WHITE);
 }
 
-void bullet_update(bullet* current_bullet)
+void bullet_update(bullet* current_bullet, enemy_list* list, float radius)
 {
+	bullet_find_target(current_bullet, list, radius);
 	bullet_draw(current_bullet);
 	current_bullet->bullet_move(current_bullet);
 }
 
 
-void update_bullet_list(bullet_list *head){
+void update_bullet_list(bullet_list *head, enemy_list* list, float radius){
 	bullet_list *iterator = head->next;
 	bullet_list *previous = head;
 
 	while (iterator != NULL){
 		bullet_list *next = iterator->next;
 
-		bullet_update(iterator->selected_bullet);
+		bullet_update(iterator->selected_bullet, list, radius);
 
 		if (!iterator->selected_bullet->active) {
 			previous->next = next;
@@ -94,7 +102,7 @@ void tower_shoot(tower* current_tower, enemy_list* list){
 		}	
 	}
 
-	update_bullet_list(current_tower->active_bullets);
+	update_bullet_list(current_tower->active_bullets, list, current_tower->type.radius);
 
 }
 

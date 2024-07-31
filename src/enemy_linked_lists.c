@@ -2,7 +2,7 @@
 #include "enemy.h"
 #include "enemy_linked_lists.h"
 #include "math.h"
-
+#include <stdbool.h>
 
 void push_enemy_to_list(enemy_list *head, enemy* new_element_value){
 	enemy_list *new_element = malloc(sizeof(enemy_list));
@@ -57,6 +57,8 @@ int return_no_enemy_list(enemy_list *head){
 
 enemy* enemy_in_range(Vector2 position, float radius,enemy_list *head){
 	enemy_list *iterator = head->next;  
+	bool found=false;
+	enemy* target;
 	
 	while (iterator != NULL){
 		enemy_list *next = iterator->next;
@@ -66,11 +68,14 @@ enemy* enemy_in_range(Vector2 position, float radius,enemy_list *head){
 		float distance=sqrt(distanceX*distanceX+distanceY*distanceY);	
 
 		if (distance<radius) 
-			return iterator->selected_enemy;
-
+		{
+			target=iterator->selected_enemy;
+			radius=distance;
+			found=true;
+		}
 		iterator = next;
 	}
-
+	if(found) return target;
 	return NULL;
 }
 

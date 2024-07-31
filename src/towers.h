@@ -48,5 +48,6 @@ void update_bullet_list(bullet_list *head, enemy_list* list, float radius);
 void tower_upgrade(tower* current_tower, int upgrade_number, int* total_money);
 void unload_towers(tower** tower_list, int number_of_towers);
 void bullet_find_target(bullet* current_bulet, enemy_list* list, float radius);
+int upgrade_options_select(tower* current_tower, Vector2 mouse_position);
 
 #endif

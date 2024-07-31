@@ -9,4 +9,5 @@
 #define gui_string_buffer_size 200
 #define gui_position_x 32
 #define gui_position_y 32
+#define FAIL -1
 #define gui_text_size 32

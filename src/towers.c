@@ -4,6 +4,36 @@
 #include<math.h>
 #include"constants.c"
 
+int upgrade_options_select(tower* current_tower, Vector2 mousePosition)
+{	
+
+	if (current_tower->type.upgrade_options_number>0 &&
+			mousePosition.x >= current_tower->position.x -current_tower->type.texture.width/2 &&
+			mousePosition.x <= current_tower->position.x -current_tower->type.texture.width/2 + option_width &&
+			mousePosition.y >= current_tower->position.y -current_tower->type.texture.height/2 &&
+			mousePosition.y <= current_tower->position.y -current_tower->type.texture.height/2+ option_height) return 0;
+
+	if (current_tower->type.upgrade_options_number>1 &&
+			mousePosition.x >= current_tower->position.x +current_tower->type.texture.width &&
+			mousePosition.x <= current_tower->position.x +current_tower->type.texture.width + option_width &&
+			mousePosition.y >= current_tower->position.y -current_tower->type.texture.height/2 &&
+			mousePosition.y <= current_tower->position.y -current_tower->type.texture.height/2+ option_height) return 1;
+
+	if (current_tower->type.upgrade_options_number>2 &&
+			mousePosition.x >= current_tower->position.x -current_tower->type.texture.width/2 &&
+			mousePosition.x <= current_tower->position.x -current_tower->type.texture.width/2 + option_width &&
+			mousePosition.y >= current_tower->position.y +current_tower->type.texture.height/2 &&
+			mousePosition.y <= current_tower->position.y +current_tower->type.texture.height/2+ option_height) return 2;
+
+	if (current_tower->type.upgrade_options_number>3 &&
+			mousePosition.x >= current_tower->position.x +current_tower->type.texture.width &&
+			mousePosition.x <= current_tower->position.x +current_tower->type.texture.width + option_width &&
+			mousePosition.y >= current_tower->position.y +current_tower->type.texture.height/2 &&
+			mousePosition.y <= current_tower->position.y +current_tower->type.texture.height/2+ option_height) return 3;
+
+	return FAIL;
+}
+
 void push_bullet_to_list(bullet_list *head, bullet* new_element_value){
 	bullet_list *new_element = malloc(sizeof(bullet_list));
 	bullet_list *iterator = head;
@@ -90,8 +120,8 @@ void unload_bullet_list(bullet_list *head){
 void tower_shoot(tower* current_tower, enemy_list* list, float time_offset){
 
 	current_tower->elapsed_time=GetTime()-time_offset;
-
 	Vector2 bullet_position={current_tower->position.x+current_tower->type.texture.width/2, current_tower->position.y+current_tower->type.texture.height/2};
+
 	if(current_tower->type.bullet_type.active && current_tower->elapsed_time-current_tower->start_time>current_tower->type.shoot_delay)
 	{
 		enemy* enemy_to_shoot=enemy_in_range(bullet_position,current_tower->type.radius,list);
@@ -110,14 +140,13 @@ void tower_shoot(tower* current_tower, enemy_list* list, float time_offset){
 void tower_click(tower* current_tower, int* total_money){
 
 	Vector2 mousePosition={GetMouseX(),GetMouseY()};
-	
+
 	if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && current_tower->open_menu==true )
 	{	
-		if (current_tower->type.upgrade_options_number>0 && mousePosition.x >= current_tower->position.x -current_tower->type.texture.width/2 &&
-				mousePosition.x <= current_tower->position.x -current_tower->type.texture.width/2 + option_width &&
-				mousePosition.y >= current_tower->position.y -current_tower->type.texture.height/2 &&
-				mousePosition.y <=-current_tower->type.texture.height/2+ current_tower->position.y + option_height) {
-			tower_upgrade(current_tower, 0, total_money);
+		int option=upgrade_options_select(current_tower,mousePosition);
+		if(option!=FAIL)
+		{
+			tower_upgrade(current_tower, option, total_money);
 			current_tower->open_menu=false;
 		}
 

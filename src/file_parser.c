@@ -121,7 +121,7 @@ tower_type tower_type_from_file(char* tower_type_path)
 {
 	FILE* file=fopen(tower_type_path,"r");
 	if (file == NULL) {
-		perror("1Failed to open file ");
+		perror("Failed to open file ");
 	}
 	tower_type new_type;
 	int bullet_type, i;
@@ -224,8 +224,13 @@ level* get_level_from_file(char* level_file)
 	enemy_list* list=malloc(sizeof(enemy_list));
 	list->next=NULL;
 	new_level->en_list=list;
+	fscanf(file,"%s",back_path);
+	new_level->gui_texture=LoadTexture(back_path);
 
 	fclose(file);
+	new_level->real_time=GetTime();
+	new_level->pause_time=0;
+	new_level->paused=false;
 	return new_level;	
 }
 

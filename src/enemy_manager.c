@@ -2,11 +2,10 @@
 #include <stdlib.h>
 #include "enemy_linked_lists.h"
 
-void enemies_spawn (wave *level_waves, int wave_number, enemy_list* active_enemies, int* money, int* lives)
-{
-	double current_time=GetTime();
+void enemies_spawn (wave *level_waves, int wave_number, enemy_list* active_enemies, double real_time, double pause_time, int* money, int* lives)
+{	
+	double current_time=GetTime()-real_time-pause_time;
 	int wave_index, wave_item_index;
-
 	for(wave_index=0; wave_index<wave_number; wave_index++)
 	{	
 		if(level_waves[wave_index].start_time<current_time)

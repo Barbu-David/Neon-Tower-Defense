@@ -1,8 +1,7 @@
-Implement money system for buying towers;
 Implement upgrade_options_buttons;
-Implement lives system for winning/losing;
 Implement level_ending, graded levels;
-Implement early wave call;
-Replace art assets with better ones;
-Implement animations;
-Implement sfx and audio track;
+Implement menu;
+
+needs:
+menu, level selector, saving/loading, enemy_attributes, damage_effects, audio, animations, level_editor;
+wants: melee, spells, beastiary, interactive backgrounds;

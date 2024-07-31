@@ -6,6 +6,7 @@
 #include "towers.h"
 #include "bullet_types.h"
 #include "file_parser.h"
+#include "stdbool.h"
 
 int main(void)
 {
@@ -14,7 +15,8 @@ int main(void)
 
 	InitWindow(screen_width, screen_height, "Tower defense");
 	SetTargetFPS(60);
-
+	
+		
 
 	level* level1=get_level_from_file("./assets/levels/level1.data");
 
@@ -22,7 +24,6 @@ int main(void)
 	{
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
-		
 		play_level(level1);
 		EndDrawing();
 	}

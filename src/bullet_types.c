@@ -43,9 +43,7 @@ void normal_bullet_move(bullet* current_bullet)
 }
 void no_bullet_move(bullet* current_bullet)
 {
-
 	current_bullet->active=false;
-
 }
 
 bullet normal_bullet_get(){

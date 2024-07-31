@@ -23,7 +23,7 @@ void play_level(level* current_level)
 	{
 		enemies_spawn(current_level->wave_list,current_level->waves_number,current_level->en_list,current_level->real_time,current_level->pause_time,current_level->money,current_level->lives);
 
-		tower_update(current_level->tower_list,current_level->tower_number,current_level->en_list,current_level->money);
+		tower_update(current_level->tower_list,current_level->tower_number,current_level->en_list,current_level->money,current_level->real_time+current_level->pause_time);
 	}
 
 }

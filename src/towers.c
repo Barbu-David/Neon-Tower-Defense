@@ -87,9 +87,9 @@ void unload_bullet_list(bullet_list *head){
 }
 
 
-void tower_shoot(tower* current_tower, enemy_list* list){
+void tower_shoot(tower* current_tower, enemy_list* list, float time_offset){
 
-	current_tower->elapsed_time=GetTime();
+	current_tower->elapsed_time=GetTime()-time_offset;
 
 	if(current_tower->type.bullet_type.active && current_tower->elapsed_time-current_tower->start_time>current_tower->type.shoot_delay)
 	{
@@ -137,11 +137,11 @@ void tower_draw(tower* current_tower){
 
 }
 
-void tower_update(tower** current_tower_list, int number_of_towers, enemy_list* list, int* total_money)
+void tower_update(tower** current_tower_list, int number_of_towers, enemy_list* list, int* total_money, float time_offset)
 {
 	for(int i=0;i<number_of_towers;i++)
 	{
-		tower_shoot(current_tower_list[i], list);
+		tower_shoot(current_tower_list[i], list, time_offset);
 		tower_click(current_tower_list[i], total_money);
 		tower_draw(current_tower_list[i]);
 	}

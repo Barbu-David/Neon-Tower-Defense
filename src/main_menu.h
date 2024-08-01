@@ -13,7 +13,11 @@ typedef struct LEVEL_BOX {
 typedef struct MAIN_MENU {
 	Texture2D menu_texture;
 	level_box* boxes;
-	int level_number;
+	int number_of_levels;
+	float width, height, origin_x,origin_y;
 }main_menu;
+
+main_menu* menu_load(char* menu_path, char* dir_path);
+void menu_unload(main_menu* menu);
 
 #endif

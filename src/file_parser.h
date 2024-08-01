@@ -16,6 +16,7 @@ typedef struct LEVEL {
 	int* lives;
 	double real_time, pause_time;
 	bool paused;
+	char* level_slot;
 }level;
 
 enemy_type enemy_type_from_file(char* enemy_file);

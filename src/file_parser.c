@@ -205,7 +205,7 @@ level* get_level_from_file(char* level_file)
 		perror("Failed to open file ");
 	}
 	char back_path[max_string], wave_path[max_string], towers_path[max_string];
-
+	fscanf(file,"%s",new_level->level_slot);
 	new_level->lives=malloc(sizeof(int));
 	new_level->money=malloc(sizeof(int));
 	fscanf(file,"%d",new_level->money);

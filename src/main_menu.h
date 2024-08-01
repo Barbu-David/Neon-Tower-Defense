@@ -6,18 +6,18 @@
 
 typedef struct LEVEL_BOX {
 	Rectangle box;
-	level* selected_level;
-	char box_text[max_string], key[max_string];
+	char selected_level_path[max_string];
+	char box_text[max_string];
 }level_box;
 
 typedef struct MAIN_MENU {
 	Texture2D menu_texture;
 	level_box* boxes;
 	int number_of_levels;
-	float width, height, origin_x,origin_y;
+	float width, height, origin_x,origin_y,space;
 }main_menu;
 
-main_menu* menu_load(char* menu_path, char* dir_path);
+main_menu* menu_load(char* menu_path);
 void menu_unload(main_menu* menu);
 
 #endif

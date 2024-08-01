@@ -12,5 +12,5 @@ typedef struct GAME_CONTROLLER {
 
 void game_play(game_controller* controller);
 void game_unload(game_controller* controller);
-game_controller* game_load(char* dir_path, char* menu_path);
+game_controller* game_load(char* menu_path);
 #endif

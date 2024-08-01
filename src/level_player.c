@@ -25,6 +25,10 @@ void play_level(level* current_level)
 
 		tower_update(current_level->tower_list,current_level->tower_number,current_level->en_list,current_level->money,current_level->real_time+current_level->pause_time);
 	}
+	else 
+	{
+		menu_gui_update(current_level);
+	}
 
 }
 
@@ -32,7 +36,9 @@ void level_unload(level* current_level)
 {
 	free(current_level->money);
 	free(current_level->lives);
-	UnloadTexture(current_level->background);    
+	UnloadTexture(current_level->background);   
+	UnloadTexture(current_level->gui_texture);
+	UnloadTexture(current_level->pause_menu_texture); 
 	unload_towers(current_level->tower_list,current_level->tower_number);
 	unload_enemies(current_level->en_list);
 	free(current_level->wave_list);

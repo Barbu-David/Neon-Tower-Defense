@@ -226,6 +226,8 @@ level* get_level_from_file(char* level_file)
 	new_level->en_list=list;
 	fscanf(file,"%s",back_path);
 	new_level->gui_texture=LoadTexture(back_path);
+	fscanf(file,"%s",back_path);
+	new_level->pause_menu_texture=LoadTexture(back_path);
 
 	fclose(file);
 	new_level->real_time=GetTime();

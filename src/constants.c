@@ -1,3 +1,5 @@
+#define screen_width 800
+#define screen_height 450
 #define max_enemy_name_size 50
 #define max_waypoints_number 50
 #define max_wave_item 10
@@ -11,3 +13,6 @@
 #define gui_position_y 32
 #define FAIL -1
 #define gui_text_size 32
+#define menu_gui_width 200
+#define menu_gui_height 100
+#define menu_gui_option_number 2

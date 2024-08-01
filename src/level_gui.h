@@ -4,5 +4,6 @@
 #include"file_parser.h"
 
 void draw_level_gui(level* current_level);
+void menu_gui_update(level* current_level);
 
 #endif

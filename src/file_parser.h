@@ -7,7 +7,7 @@
 #include<stdbool.h>
 
 typedef struct LEVEL {
-	Texture2D background, gui_texture;
+	Texture2D background, gui_texture, pause_menu_texture;
 	int tower_number, waves_number;
 	wave* wave_list;
 	tower** tower_list;

@@ -5,7 +5,7 @@
 #include<stdbool.h>
 
 typedef struct GAME_CONTROLLER {
-	bool playing;
+	bool playing, should_close;
 	level* current_level;
 	main_menu* menu;	
 }game_controller;

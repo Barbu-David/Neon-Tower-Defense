@@ -16,6 +16,7 @@ game_controller* game_load(char* menu_path)
 void game_unload(game_controller* controller)
 {
 	menu_unload(controller->menu);
+	if(controller->playing) level_unload(controller->current_level);
 	free(controller);
 }
 
@@ -40,7 +41,6 @@ void game_play(game_controller* controller)
 		}
 		else if((controller->current_level->paused) && (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) &&  (CheckCollisionPointRec(mousePosition,opt2))))
 		{	
-			level_unload(controller->current_level);
 			controller->should_close=true;
 		}
 	}
@@ -53,11 +53,10 @@ void game_play(game_controller* controller)
 			DrawText(controller->menu->boxes[i].box_text,controller->menu->boxes[i].box.x,controller->menu->boxes[i].box.y,16,WHITE);
 
 			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(mousePosition,controller->menu->boxes[i].box))
-			{
+			{	
 				controller->current_level=get_level_from_file(controller->menu->boxes[i].selected_level_path);
 				controller->playing=true;
 			}
-
 
 		}
 	}

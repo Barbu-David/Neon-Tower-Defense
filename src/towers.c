@@ -161,6 +161,7 @@ void tower_click(tower* current_tower, int* total_money){
 
 }	
 void tower_draw(tower* current_tower){
+	DrawCircleLines(current_tower->position.x+current_tower->type.texture.width/2,current_tower->position.y+current_tower->type.texture.height/2,current_tower->type.radius,WHITE);
 	DrawTexture(current_tower->type.texture, current_tower->position.x,current_tower->position.y, WHITE);
 	if(current_tower->open_menu) DrawTexture(current_tower->type.ring_texture, current_tower->position.x-current_tower->type.texture.width/2,current_tower->position.y-current_tower->type.texture.height/2, WHITE);
 

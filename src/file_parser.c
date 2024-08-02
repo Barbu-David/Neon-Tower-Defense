@@ -185,7 +185,6 @@ tower** tower_list_from_file(char* tower_list_path)
 		fscanf(file,"%f",&tower_list[i]->position.x);
 		fscanf(file,"%f",&tower_list[i]->position.y);
 		fscanf(file,"%s",type_path);
-
 		tower_list[i]->type=tower_type_from_file(type_path);
 		tower_list[i]->open_menu=false;
 		tower_list[i]->active_bullets=bl;

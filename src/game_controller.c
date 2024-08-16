@@ -50,8 +50,8 @@ void game_play(game_controller* controller)
 		DrawTexture(controller->menu->menu_texture,0,0,WHITE);
 		for(i=0;i<controller->menu->number_of_levels;i++)
 		{
-			DrawRectangleRec(controller->menu->boxes[i].box,BLACK);
-			DrawText(controller->menu->boxes[i].box_text,controller->menu->boxes[i].box.x,controller->menu->boxes[i].box.y,16,WHITE);
+			DrawRectangleRec(controller->menu->boxes[i].box,ORANGE);
+			DrawText(controller->menu->boxes[i].box_text,controller->menu->boxes[i].box.x,controller->menu->boxes[i].box.y,16,BLACK);
 
 			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(mousePosition,controller->menu->boxes[i].box))
 			{	

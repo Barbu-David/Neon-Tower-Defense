@@ -1,5 +1,4 @@
 #include"file_parser.h"
-#include<stdio.h>
 #include<string.h>
 #include"constants.c"
 #include<stdlib.h>

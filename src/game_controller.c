@@ -1,5 +1,6 @@
 #include"game_controller.h"
 #include<stdlib.h>
+#include"file_parser.h"
 
 game_controller* game_load(char* menu_path)
 {

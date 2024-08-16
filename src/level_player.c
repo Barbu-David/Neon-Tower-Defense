@@ -1,5 +1,6 @@
 #include "level_player.h"
 #include <stdlib.h>
+#include "level_gui.h"
 
 void level_pause(level* current_level)
 {

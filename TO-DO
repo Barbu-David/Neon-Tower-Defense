@@ -1,2 +1,0 @@
-enemy_attributes, damage_effects, audio, animations, level_editor;
-wants: melee, spells, beastiary, interactive backgrounds;

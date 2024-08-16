@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stddef.h>
 
-void normal_bullet_move(bullet* current_bullet)
+void normal_bullet_move(bullet* current_bullet, int bullet_damage, float bullet_speed)
 {	
 	if(current_bullet->target==NULL)
 	{
@@ -15,7 +15,7 @@ void normal_bullet_move(bullet* current_bullet)
         float targetX=current_bullet->target->position.x+current_bullet->target->type.texture.width/2;
         float targetY=current_bullet->target->position.y+current_bullet->target->type.texture.height/2;
         float frame_time=GetFrameTime();
-        float speed=1000*frame_time;
+        float speed=bullet_speed*frame_time;
 
         float directionX = targetX - currentX;
         float directionY = targetY - currentY;
@@ -25,7 +25,7 @@ void normal_bullet_move(bullet* current_bullet)
         if (distance < speed) 
 		{
                 current_bullet->active=false;
-		current_bullet->target->type.hit_points-=1000;
+		current_bullet->target->type.hit_points-=bullet_damage;
         }
         else {
                 directionX /= distance;
@@ -41,7 +41,7 @@ void normal_bullet_move(bullet* current_bullet)
 
 
 }
-void no_bullet_move(bullet* current_bullet)
+void no_bullet_move(bullet* current_bullet, int damage, float speed)
 {
 	current_bullet->active=false;
 }

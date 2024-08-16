@@ -147,6 +147,9 @@ tower_type tower_type_from_file(char* tower_type_path)
 		fscanf(file,"%s",upgrade_path);
 		new_type.upgrade_possibility[i]=tower_type_from_file(upgrade_path);
 	}
+	
+	fscanf(file,"%d",&new_type.bullet_damage);
+	fscanf(file,"%f",&new_type.bullet_speed);
 
 	fclose(file);
 	return new_type;

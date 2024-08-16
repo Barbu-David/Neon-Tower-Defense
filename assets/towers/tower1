@@ -2,7 +2,7 @@
 ./assets/tower_textures/blue_tower.png
 ./assets/tower_textures/tower_ring.png
 100
-1
-100
+0.5
+200
 0 
-
+50 500
